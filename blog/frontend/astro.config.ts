@@ -14,6 +14,7 @@ export default defineConfig({
   site: themeConfig.site.website,
   prefetch: true,
   base: '/skmang_notes/',
+  trailingSlash: 'never',
   vite: {
     plugins: [
       // eslint-disable-next-line ts/ban-ts-comment
