@@ -2,6 +2,10 @@
 
 本目录包含博客的所有内容，包括文章、草稿、静态资源，以及前端站点配置。
 
+## 主题说明
+
+本博客使用 [Astro Theme Typography](https://github.com/moeyua/astro-theme-typography) 主题，专注于提供优秀的中文排版和阅读体验。
+
 ## 目录结构
 
 ```
@@ -12,25 +16,32 @@ blog/
 ├── templates/       # 文章模板
 ├── index.md         # 目录说明
 ├── README.md        # 本文件
-└── frontend/        # Astro 前端项目
+└── frontend/        # Astro 前端项目（Typography 主题）
 ```
 
 ## 写作指南
 
 ### 创建新文章
 
-1. 从 `templates/post.md` 复制模板
-2. 在 `blog/posts/` 创建新文件
-3. 填写 frontmatter 字段：
+1. 进入 frontend 目录：
+   ```bash
+   cd blog/frontend
+   pnpm theme:create
+   ```
+
+   或者手动创建文件在 `blog/frontend/src/content/posts/`
+
+2. 填写 frontmatter 字段（Typography 主题格式）：
    ```yaml
    ---
    title: "文章标题"
-   date: "2025-12-26"
-   tags: ["标签1", "标签2"]  # 可选
-   draft: false               # true 为草稿，不会发布
-   summary: "文章摘要"          # 可选
+   pubDate: 2025-12-26
+   categories: ["技术"]
+   description: "文章描述"
    ---
    ```
+
+   注意：使用 `pubDate` 而不是 `date`，使用 `categories` 而不是 `tags`。
 
 ### 文章格式
 
@@ -41,16 +52,15 @@ blog/
 
 ### 草稿管理
 
-- 写作中的文章放入 `blog/drafts/`
-- 设置 `draft: true`
-- 发布时移动到 `blog/posts/` 并设置 `draft: false`
+- 写作中的文章放入 `blog/drafts/` 或 `blog/frontend/src/content/posts/` 并在文件名前添加 `DRAFT-` 前缀
+- 完成后移除前缀，文章将自动显示在站点上
 
 ## 前端开发
 
 ### 环境要求
 
 - Node.js 18+
-- npm 或 pnpm
+- pnpm（推荐）
 
 ### 开发命令
 
@@ -59,91 +69,162 @@ blog/
 cd blog/frontend
 
 # 安装依赖（首次运行）
-npm install
+pnpm install
 
 # 启动开发服务器
-npm run dev
+pnpm dev
 
 # 构建生产版本
-npm run build
+pnpm build
 
 # 预览构建结果
-npm run preview
+pnpm preview
+
+# 创建新文章（使用脚本）
+pnpm theme:create
 ```
 
 ### 主题定制
 
-修改 `blog/frontend/src/styles/theme.css` 中的 CSS 变量：
+Typography 主题的配置位于 `blog/frontend/src/.config/user.ts`。
 
-```css
-:root {
-  --primary-color: #2563eb;      /* 主色调 */
-  --text-primary: #1f2937;       /* 主文本颜色 */
-  --bg-color: #ffffff;           /* 背景颜色 */
-  /* ... 更多变量 */
+#### 主要配置项
+
+```typescript
+export const userConfig: Partial<UserConfig> = {
+  site: {
+    title: 'skmang_notes',        // 站点标题
+    subtitle: '个人开发知识库',      // 副标题
+    author: 'skmang',              // 作者
+    description: '记录开发过程中的学习和思考', // 描述
+    website: 'https://skmang.github.io/skmang_notes/', // 站点地址
+    pageSize: 10,                 // 每页文章数
+    socialLinks: [...],           // 社交链接
+    navLinks: [...],              // 导航菜单
+  },
+  appearance: {
+    theme: 'system',              // 'light' | 'dark' | 'system'
+    locale: 'zh-cn',              // 语言设置
+  },
+  comment: {
+    giscus: { ... },              // Giscus 评论配置
+  },
+  // ... 更多配置
 }
 ```
+
+#### 黑暗模式
+
+主题支持三种主题模式：
+- `'light'` - 浅色模式
+- `'dark'` - 深色模式
+- `'system'` - 跟随系统设置（默认）
+
+#### 自定义样式
+
+如需自定义样式，可以创建 CSS 文件并在 `blog/frontend/src/styles/global.css` 中导入。
 
 ### 组件结构
 
 ```
 frontend/src/
+├── .config/
+│   ├── default.ts         # 默认配置（不要修改）
+│   └── user.ts           # 用户配置（在这里修改）
 ├── layouts/
-│   └── Layout.astro         # 主布局模板
+│   ├── LayoutDefault.astro    # 默认布局
+│   ├── LayoutPost.astro        # 文章布局
+│   └── LayoutPostList.astro   # 文章列表布局
 ├── pages/
-│   ├── index.astro          # 首页
-│   ├── blog/posts/
-│   │   ├── index.astro      # 文章列表
-│   │   └── [slug].astro     # 文章详情
-│   └── rss.xml.js           # RSS 订阅
+│   ├── [...page].astro         # 首页（文章列表）
+│   ├── about.astro             # 关于页面
+│   ├── archive.astro           # 归档页面
+│   ├── categories/             # 分类页面
+│   ├── posts/[...id].astro     # 文章详情
+│   └── atom.xml.ts            # RSS feed
 ├── components/
-│   └── Giscus.astro         # 评论组件
+│   ├── Analytics.astro         # 分析组件
+│   ├── Comments.astro          # 评论组件
+│   └── ...                    # 其他组件
+├── content/
+│   ├── posts/                  # 文章内容（Markdown）
+│   └── spec/                  # 特殊页面内容
 └── styles/
-    └── theme.css            # 主题样式
+    └── global.css             # 全局样式
 ```
 
 ## 部署
 
 ### GitHub Pages 自动部署
 
-1. 配置 `blog/frontend/astro.config.mjs` 中的 `site` 和 `base` 路径
+1. 确保站点地址配置正确：`blog/frontend/src/.config/user.ts` 中的 `website` 字段
 2. 配置 Giscus 评论系统（见下方）
 3. 推送到 GitHub，GitHub Actions 会自动构建并部署
 
-站点地址：`https://[yourusername].github.io/skmang_notes/`
+站点地址：`https://skmang.github.io/skmang_notes/`
 
 ### 手动部署
 
 ```bash
 cd blog/frontend
-npm run build
+pnpm build
 # 将 dist/ 目录上传到你的 Web 服务器
 ```
 
+### GitHub Actions 工作流
+
+确保项目根目录有正确的 GitHub Actions 配置文件，用于自动构建和部署到 GitHub Pages。
+
 ## 评论系统配置（Giscus）
 
-1. 访问 https://github.com/apps/giscus 安装应用到你的仓库
-2. 访问 https://giscus.app/ 获取配置参数
-3. 修改 `blog/frontend/src/components/Giscus.astro` 中的默认值：
+1. 访问 [Giscus 官网](https://giscus.app/)
+2. 填入你的仓库信息（如：`skmang/skmang_notes`）
+3. 启用 Discussions 功能
+4. 复制生成的配置参数
+5. 将参数填入 `blog/frontend/src/.config/user.ts` 中的 `comment.giscus` 部分：
 
-```astro
-const {
-  repo = 'YOUR_USERNAME/YOUR_REPO',  // 修改为你的仓库
-  repoId = '',                        // 填入 repo ID
-  categoryId = '',                    // 填入 category ID
-  // ... 其他配置
-} = Astro.props;
+```typescript
+comment: {
+  giscus: {
+    repo: 'skmang/skmang_notes',      // 你的 GitHub 仓库
+    repoId: 'R_xxxxxx',                // 从 giscus.app 获取
+    category: 'General',
+    categoryId: 'DIC_xxxxxx',           // 从 giscus.app 获取
+    mapping: 'title',
+    strict: '0',
+    reactionsEnabled: '1',
+    emitMetadata: '1',
+    inputPosition: 'top',
+    theme: 'light',
+    lang: 'zh-CN',
+    loading: 'lazy',
+  },
+}
 ```
+
+## 主题特性
+
+- ✅ 优秀的中文排版和阅读体验
+- ✅ 响应式设计，完美适配各种设备
+- ✅ 黑暗模式支持（跟随系统）
+- ✅ SEO 优化（Open Graph、Twitter Cards）
+- ✅ RSS feed 和 Sitemap 自动生成
+- ✅ 多种评论系统集成支持（Giscus、Disqus、Twikoo）
+- ✅ 多语言支持
+- ✅ 代码高亮
+- ✅ LaTeX 数学公式支持（可选）
 
 ## 注意事项
 
-- Markdown 文件保持原生可读性，可直接在 GitHub 上查看
-- 文章图片放在 `blog/assets/` 目录
-- 草稿不会发布到公开站点
-- 修改前端配置后需要重新构建
+- 文章 frontmatter 使用 `pubDate` 而不是 `date`
+- 文章 frontmatter 使用 `categories` 而不是 `tags`
+- 文章文件存储在 `blog/frontend/src/content/posts/`
+- 修改配置后需要重启开发服务器
+- Giscus 评论需要仓库启用 Discussions 功能
 
 ## 相关链接
 
 - [Astro 文档](https://docs.astro.build/)
+- [Typography 主题](https://github.com/moeyua/astro-theme-typography)
 - [Giscus 配置](https://giscus.app/)
 - [GitHub Pages 文档](https://docs.github.com/pages)
