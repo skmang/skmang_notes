@@ -1,7 +1,7 @@
 # 项目上下文（Project Context）
 
 ## 目的（Purpose）
-`ProjectDocs` 是个人开发知识库与写作仓库（仅 Markdown），用于在开发过程中沉淀笔记、方案/决策、学习记录、待办与可发布文章。仓库不存放任何项目源码。
+`skmang_notes` 是个人开发知识库与写作仓库（仅 Markdown），用于在开发过程中沉淀笔记、方案/决策、学习记录、待办与可发布文章。仓库不存放任何项目源码。
 
 ## 技术栈（Tech Stack）
 - Markdown（`.md`）为主，静态资源可放在 `blog/assets/`

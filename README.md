@@ -1,4 +1,4 @@
-# ProjectDocs
+# skmang_notes
 
 个人开发者知识库与写作仓库（仅 Markdown）。这里不存放任何项目源码。
 
@@ -39,8 +39,8 @@
 ### 博客站点
 - 技术栈：Astro 静态站点生成器 + Giscus 评论系统
 - 部署方式：GitHub Pages 自动部署
-- 访问地址：https://[yourusername].github.io/ProjectDocs/
-- RSS 订阅：https://[yourusername].github.io/ProjectDocs/rss.xml
+- 访问地址：https://[yourusername].github.io/skmang_notes/
+- RSS 订阅：https://[yourusername].github.io/skmang_notes/rss.xml
 
 ### 快速开始
 1. 查看 `blog/README.md` 了解详细使用方法

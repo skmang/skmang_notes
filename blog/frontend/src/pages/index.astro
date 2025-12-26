@@ -8,7 +8,7 @@ const publishedPosts = allPosts.filter(post => !post.data.draft);
 
 <Layout title="首页">
   <section>
-    <h1>欢迎来到 ProjectDocs 博客</h1>
+    <h1>欢迎来到 skmang_notes 博客</h1>
     <p>这里是个人开发知识库的博客，记录开发过程中的思考与收获。</p>
   </section>
 
@@ -17,7 +17,7 @@ const publishedPosts = allPosts.filter(post => !post.data.draft);
     <ul>
       {publishedPosts.map(post => (
         <li>
-          <a href={`/ProjectDocs/blog/posts/${post.slug}/`}>
+          <a href={`/skmang_notes/blog/posts/${post.slug}/`}>
             <h3>{post.data.title}</h3>
             <small>{post.data.date.toISOString().split('T')[0]}</small>
             {post.data.summary && <p>{post.data.summary}</p>}
@@ -26,7 +26,7 @@ const publishedPosts = allPosts.filter(post => !post.data.draft);
       ))}
     </ul>
     <p>
-      <a href="/ProjectDocs/blog/posts/">查看所有文章 &rarr;</a>
+      <a href="/skmang_notes/blog/posts/">查看所有文章 &rarr;</a>
     </p>
   </section>
 </Layout>

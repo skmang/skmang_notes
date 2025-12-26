@@ -37,7 +37,7 @@ blog/
 - 标题使用 `# 文章标题`
 - 小节使用 `##` 或 `###`
 - 代码块使用三个反引号包裹
-- 图片引用：`![描述](/ProjectDocs/blog/assets/文件名.png)`
+- 图片引用：`![描述](/skmang_notes/blog/assets/文件名.png)`
 
 ### 草稿管理
 
@@ -110,7 +110,7 @@ frontend/src/
 2. 配置 Giscus 评论系统（见下方）
 3. 推送到 GitHub，GitHub Actions 会自动构建并部署
 
-站点地址：`https://[yourusername].github.io/ProjectDocs/`
+站点地址：`https://[yourusername].github.io/skmang_notes/`
 
 ### 手动部署
 

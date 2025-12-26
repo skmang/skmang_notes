@@ -13,7 +13,7 @@ const publishedPosts = allPosts
   <ul>
     {publishedPosts.map(post => (
       <li>
-        <a href={`/ProjectDocs/blog/posts/${post.slug}/`}>
+        <a href={`/skmang_notes/blog/posts/${post.slug}/`}>
           <h2>{post.data.title}</h2>
           <time datetime={post.data.date.toISOString()}>
             {post.data.date.toISOString().split('T')[0]}

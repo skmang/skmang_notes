@@ -113,7 +113,7 @@ blog/
 - 当 `blog/posts/` 或 `blog/frontend/` 有变更时触发构建
 - 构建命令: `cd blog/frontend && npm ci && npm run build`
 - 部署路径: 将 `dist/` 目录推送到 `gh-pages` 分支
-- 站点路径: `https://[username].github.io/ProjectDocs/`
+- 站点路径: `https://[username].github.io/skmang_notes/`
 
 **理由:**
 - 无需额外服务器或域名
