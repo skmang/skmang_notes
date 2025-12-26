@@ -1,72 +1,53 @@
 # 实施任务清单
 
 ## 1. 确认主题代码
-- [ ] 1.1 确认 Typography 主题代码已放置在 `blog/frontend/` 目录
-- [ ] 1.2 检查主题文件结构完整性
+- [x] 1.1 确认 Typography 主题代码已放置在 `blog/frontend/` 目录
+- [x] 1.2 检查主题文件结构完整性
 
 ## 2. 安装依赖
-- [ ] 2.1 清理现有的 `node_modules`（如有）
-- [ ] 2.2 运行 `npm install` 安装主题依赖
-- [ ] 2.3 验证依赖安装成功
+- [x] 2.1 清理现有的 `node_modules`（如有）
+- [x] 2.2 运行 `pnpm install` 安装主题依赖
+- [x] 2.3 验证依赖安装成功
 
 ## 3. 配置定制
-- [ ] 3.1 创建或修改 `src/.config/user.ts` 配置文件
-- [ ] 3.2 配置站点基本信息：
+- [x] 3.1 创建或修改 `src/.config/user.ts` 配置文件
+- [x] 3.2 配置站点基本信息：
   - 设置站点标题和描述
   - 配置语言为 `zh-cn`
-- [ ] 3.3 配置导航菜单：
+- [x] 3.3 配置导航菜单：
   - 设置 Posts 链接
   - 设置 Archive 链接
   - 设置 Categories 链接
   - 设置 About 链接
-- [ ] 3.4 配置黑暗模式：
+- [x] 3.4 配置黑暗模式：
   - 设置 `themeStyle` 为 `'system'`
-- [ ] 3.5 配置社交媒体链接（如需要）
-- [ ] 3.6 配置 Giscus 评论系统：
-  - 设置 `repo`（你的仓库）
-  - 设置 `repoId`
-  - 设置 `category` 和 `categoryId`
-  - 配置其他 Giscus 参数
+- [x] 3.5 配置社交媒体链接（如需要）
+- [x] 3.6 配置 Giscus 评论系统：
+  - [x] 设置 `repo`（你的仓库）
+  - [x] 设置 `repoId`（R_kgDOQvIC8w）
+  - [x] 设置 `category` 和 `categoryId`（Announcements, DIC_kwDOQvIC884C0QWi）
+  - [x] 配置其他 Giscus 参数
 
-## 4. 本地测试
-- [ ] 4.1 运行构建测试：`npm run build`
-- [ ] 4.2 启动开发服务器：`npm run dev`
-- [ ] 4.3 验证首页正常显示
-- [ ] 4.4 验证文章列表页面（如有示例文章）
-- [ ] 4.5 验证分类页面
-- [ ] 4.6 验证归档页面
-- [ ] 4.7 验证关于页面
-- [ ] 4.8 验证 RSS feed（访问 `/rss.xml`）
-- [ ] 4.9 验证 Sitemap（访问 `/sitemap-index.xml`）
-- [ ] 4.10 验证黑暗模式切换
-- [ ] 4.11 验证响应式设计（测试不同屏幕尺寸）
-- [ ] 4.12 验证 Giscus 评论组件加载（如有示例文章）
-- [ ] 4.13 验证社交媒体链接
+## 4. 本地测试（跳过，根据用户规则不编译运行项目）
 
 ## 5. 部署配置更新
-- [ ] 5.1 检查 GitHub Actions 工作流文件
-- [ ] 5.2 确保构建命令正确（`npm run build`）
-- [ ] 5.3 确保输出目录配置正确
+- [x] 5.1 检查 GitHub Actions 工作流文件
+- [x] 5.2 确保构建命令正确（`pnpm build`）
+- [x] 5.3 确保输出目录配置正确
 
-## 6. 验证和优化
-- [ ] 6.1 检查页面 SEO 元数据
-- [ ] 6.2 验证 Open Graph 标签
-- [ ] 6.3 验证 Twitter Cards
-- [ ] 6.4 测试页面加载速度
-- [ ] 6.5 跨浏览器测试（Chrome、Firefox、Safari、Edge）
-- [ ] 6.6 移动设备测试
+## 6. 验证和优化（待 GitHub Pages 部署完成后进行）
 
 ## 7. 文档更新
-- [ ] 7.1 更新 `blog/README.md`，记录新主题的使用方法
-- [ ] 7.2 记录自定义配置选项
-- [ ] 7.3 记录文章创建流程（使用主题要求的 frontmatter 格式）
+- [x] 7.1 更新 `blog/README.md`，记录新主题的使用方法
+- [x] 7.2 记录自定义配置选项
+- [x] 7.3 记录文章创建流程（使用主题要求的 frontmatter 格式）
 
 ## 8. 部署
-- [ ] 8.1 提交所有更改到 Git
-- [ ] 8.2 推送到 GitHub
-- [ ] 8.3 监控 GitHub Actions 构建
-- [ ] 8.4 验证 GitHub Pages 部署成功
-- [ ] 8.5 完整检查线上站点功能
+- [x] 8.1 提交所有更改到 Git
+- [x] 8.2 推送到 GitHub
+- [x] 8.3 监控 GitHub Actions 构建（已完成）
+- [ ] 8.4 验证 GitHub Pages 部署成功（待用户验证）
+- [ ] 8.5 完整检查线上站点功能（待用户验证）
 
 ## 9. 首篇测试文章（可选）
 - [ ] 9.1 在 `blog/frontend/src/content/posts/` 创建首篇测试文章
