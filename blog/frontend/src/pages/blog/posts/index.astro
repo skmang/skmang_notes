@@ -1,0 +1,80 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="文章列表">
+  <h1>所有文章</h1>
+  <ul>
+    {publishedPosts.map(post => (
+      <li>
+        <a href={`/ProjectDocs/blog/posts/${post.slug}/`}>
+          <h2>{post.data.title}</h2>
+          <time datetime={post.data.date.toISOString()}>
+            {post.data.date.toISOString().split('T')[0]}
+          </time>
+          {post.data.summary && <p>{post.data.summary}</p>}
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="tags">
+              {post.data.tags.map(tag => (
+                <span class="tag">#{tag}</span>
+              ))}
+            </div>
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 2rem;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h2 {
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+  }
+
+  time {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    color: #4b5563;
+  }
+
+  .tags {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: var(--code-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+</style>

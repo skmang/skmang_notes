@@ -1,0 +1,95 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import Giscus from '../../../components/Giscus.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  return allPosts
+    .filter(post => !post.data.draft)
+    .map(post => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title}>
+  <article>
+    <header>
+      <h1>{post.data.title}</h1>
+      <time datetime={post.data.date.toISOString()}>
+        {post.data.date.toISOString().split('T')[0]}
+      </time>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="tags">
+          {post.data.tags.map(tag => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+    <Content />
+    <section id="comments">
+      <h2>评论</h2>
+      <Giscus />
+    </section>
+  </article>
+</Layout>
+
+<style>
+  article {
+    max-width: 100%;
+  }
+
+  header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  time {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .tags {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: var(--code-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  #comments {
+    margin-top: 3rem;
+  }
+
+  :global(.prose) {
+    max-width: none;
+  }
+
+  :global(.prose h2) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  :global(.prose p) {
+    margin-bottom: 1rem;
+  }
+</style>

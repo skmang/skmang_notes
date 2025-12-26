@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts.filter(post => !post.data.draft);
+---
+
+<Layout title="首页">
+  <section>
+    <h1>欢迎来到 ProjectDocs 博客</h1>
+    <p>这里是个人开发知识库的博客，记录开发过程中的思考与收获。</p>
+  </section>
+
+  <section>
+    <h2>最新文章</h2>
+    <ul>
+      {publishedPosts.map(post => (
+        <li>
+          <a href={`/ProjectDocs/blog/posts/${post.slug}/`}>
+            <h3>{post.data.title}</h3>
+            <small>{post.data.date.toISOString().split('T')[0]}</small>
+            {post.data.summary && <p>{post.data.summary}</p>}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p>
+      <a href="/ProjectDocs/blog/posts/">查看所有文章 &rarr;</a>
+    </p>
+  </section>
+</Layout>
+
+<style>
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 1.5rem;
+  }
+
+  li a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem;
+    background: var(--code-bg);
+    border-radius: 0.5rem;
+    transition: background 0.2s;
+  }
+
+  li a:hover {
+    background: #e5e7eb;
+  }
+
+  li h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+  }
+
+  small {
+    color: #6b7280;
+  }
+</style>
