@@ -56,16 +56,15 @@ export const userConfig: Partial<UserConfig> = {
   },
   comment: {
     // Giscus 评论系统配置
-    // 请到 https://giscus.app/ 生成配置，然后填入以下参数
     giscus: {
-      repo: 'skmang/skmang_notes', // 你的 GitHub 仓库
-      repoId: '', // 仓库 ID，从 giscus.app 获取
-      category: 'General',
-      categoryId: '', // 分类 ID，从 giscus.app 获取
-      mapping: 'title',
+      repo: 'skmang/skmang_notes',
+      repoId: 'R_kgDOQvIC8w',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOQvIC884C0QWi',
+      mapping: 'pathname',
       strict: '0',
       reactionsEnabled: '1',
-      emitMetadata: '1',
+      emitMetadata: '0',
       inputPosition: 'top',
       theme: 'light',
       lang: 'zh-CN',
