@@ -12,11 +12,13 @@ import { themeConfig } from './src/.config'
 const siteUrl = new URL(themeConfig.site.website)
 const basePath = siteUrl.pathname.replace(/\/$/, '') || '/'
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 // https://astro.build/config
 export default defineConfig({
   site: themeConfig.site.website,
   prefetch: true,
-  base: basePath,
+  base: isDev ? '/' : basePath,
   trailingSlash: 'always',
   vite: {
     plugins: [
