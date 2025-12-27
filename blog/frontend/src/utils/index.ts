@@ -57,6 +57,33 @@ export function formatDate(date: Date, format: string = 'YYYY-MM-DD') {
   return dayjs(date).format(format)
 }
 
+const externalProtocolPattern = /^[a-z][a-z0-9+.-]*:/i
+
+export function withBase(path: string) {
+  if (!path || path.startsWith('#') || path.startsWith('?') || path.startsWith('//')) {
+    return path
+  }
+
+  if (externalProtocolPattern.test(path)) {
+    return path
+  }
+
+  const base = import.meta.env.BASE_URL || '/'
+  const normalizedBase = base.endsWith('/') ? base : `${base}/`
+  const normalizedPath = path.replace(/^\/+/, '')
+  const baseWithoutTrailing = normalizedBase === '/' ? '/' : normalizedBase.slice(0, -1)
+
+  if (baseWithoutTrailing !== '/' && path.startsWith(`${baseWithoutTrailing}/`)) {
+    return path
+  }
+
+  if (baseWithoutTrailing !== '/' && path === baseWithoutTrailing) {
+    return normalizedBase
+  }
+
+  return `${normalizedBase}${normalizedPath}`
+}
+
 export function getPathFromCategory(
   category: string,
   category_map: { name: string, path: string }[],

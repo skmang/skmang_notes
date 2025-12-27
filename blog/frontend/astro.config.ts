@@ -9,12 +9,15 @@ import UnoCSS from 'unocss/astro'
 import devtoolsJson from 'vite-plugin-devtools-json'
 import { themeConfig } from './src/.config'
 
+const siteUrl = new URL(themeConfig.site.website)
+const basePath = siteUrl.pathname.replace(/\/$/, '') || '/'
+
 // https://astro.build/config
 export default defineConfig({
   site: themeConfig.site.website,
   prefetch: true,
-  base: '/skmang_notes/',
-  trailingSlash: 'never',
+  base: basePath,
+  trailingSlash: 'always',
   vite: {
     plugins: [
       // eslint-disable-next-line ts/ban-ts-comment

@@ -4,6 +4,7 @@ import type { Post } from '~/types'
 import Disqus from '~/components/comments/Disqus.astro'
 import Giscus from '~/components/comments/Giscus.astro'
 import Twikoo from '~/components/comments/Twikoo.astro'
+import { withBase } from '~/utils'
 
 interface Props {
   post: Post
@@ -11,8 +12,8 @@ interface Props {
 
 const { id, data } = Astro.props.post
 
-const path = `/posts/${id}`
-const url = `${Astro.site?.href}${path}`
+const path = withBase(`/posts/${id}`)
+const url = Astro.site ? new URL(path, Astro.site).toString() : path
 
 const provider = getProvider()
 

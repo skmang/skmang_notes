@@ -1,5 +1,6 @@
 ---
 import { themeConfig } from '~/.config'
+import { withBase } from '~/utils'
 
 const { navLinks, socialLinks } = themeConfig.site
 const { translate: t } = Astro.locals
@@ -10,7 +11,7 @@ const { translate: t } = Astro.locals
     {
       navLinks.map((nav) => (
         <li>
-          <a class="" href={nav.href}>
+          <a class="" href={withBase(nav.href)}>
             {t(nav.name)}
           </a>
         </li>
@@ -21,7 +22,7 @@ const { translate: t } = Astro.locals
     {
       socialLinks.map(({ href, name }) => (
         <li>
-          <a href={href} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
+          <a href={withBase(href)} target="_blank" title={name} class="not-underline-hover inline-flex items-center">
             <span class:list={[`i-mdi-${name}`, 'w-6 h-6']}>{name}</span>
           </a>
         </li>

@@ -5,7 +5,7 @@ import Pagination from '~/components/Pagination.astro'
 import SiteSeo from '~/components/SiteSeo.astro'
 import LayoutDefault from '~/layouts/LayoutDefault.astro'
 import LayoutPost from '~/layouts/LayoutPost.astro'
-import { getPosts } from '~/utils'
+import { getPosts, withBase } from '~/utils'
 import { render } from 'astro:content'
 
 export const getStaticPaths = (async () => {
@@ -28,7 +28,7 @@ const { Content } = await render(entry)
 const { translate: t } = Astro.locals
 
 function getUrl(id: string) {
-  return `/posts/${id}`
+  return withBase(`/posts/${id}`)
 }
 ---
 
